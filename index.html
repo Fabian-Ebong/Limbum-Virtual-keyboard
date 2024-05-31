@@ -5,6 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Keyboard</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .key-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .key {
+            flex: 1;
+            min-width: 30px;
+            padding: 15px;
+            border: none;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .key:active {
+            background-color: #ddd;
+        }
+
+        .key-space {
+            flex: 5;
+            text-align: center;
+        }
+
+        #input {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
 </head>
 <body>
     <div class="keyboard">
@@ -79,13 +136,28 @@
             <button class="key">M</button>
         </div>
         <div class="key-row">
-                    <button class="key">Space</button>
+            <button class="key key-space">Space</button>
         </div>
         <div class="key-row">
             <button class="key">By Dr. Ebonŋ</button>
         </div>
     </div>
     <input type="text" id="input" />
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const keys = document.querySelectorAll('.key');
+            const input = document.getElementById('input');
+
+            keys.forEach(key => {
+                key.addEventListener('click', () => {
+                    if (key.textContent === 'Space') {
+                        input.value += ' ';
+                    } else {
+                        input.value += key.textContent;
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
