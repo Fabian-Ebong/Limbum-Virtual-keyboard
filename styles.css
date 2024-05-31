@@ -1,0 +1,43 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.key-row {
+    display: flex;
+    gap: 5px;
+}
+
+.key {
+    padding: 15px 20px;
+    border: none;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.key:active {
+    background-color: #ddd;
+}
+
+#input {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+}
