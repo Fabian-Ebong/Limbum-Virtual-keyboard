@@ -61,11 +61,18 @@
             width: 100%;
             max-width: 400px;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="keyboard">
         <div class="key-row">
+            <button class="key" id="villages-key">Villages</button>
+        </div>
+        <div class="key-row hidden" id="villages-keys">
             <button class="key">Mrù'</button>
             <button class="key">Ndʉŋ</button>
             <button class="key">ŋgaŋ</button>
@@ -147,12 +154,18 @@
         document.addEventListener('DOMContentLoaded', () => {
             const keys = document.querySelectorAll('.key');
             const input = document.getElementById('input');
+            const villagesKey = document.getElementById('villages-key');
+            const villagesKeys = document.getElementById('villages-keys');
+
+            villagesKey.addEventListener('click', () => {
+                villagesKeys.classList.toggle('hidden');
+            });
 
             keys.forEach(key => {
                 key.addEventListener('click', () => {
                     if (key.textContent === 'Space') {
                         input.value += ' ';
-                    } else {
+                    } else if (key.textContent !== 'Villages' && key.textContent !== 'By Dr. Ebonŋ') {
                         input.value += key.textContent;
                     }
                 });
