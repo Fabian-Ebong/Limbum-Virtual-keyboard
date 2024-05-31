@@ -70,9 +70,11 @@
 <body>
     <div class="keyboard">
         <div class="key-row">
+            <button class="key" id="weekdays-key">Week-days</button>
+            <button class="key" id="titles-key">Titles</button>
             <button class="key" id="villages-key">Villages</button>
         </div>
-        <div class="key-row hidden" id="villages-keys">
+        <div class="key-row hidden" id="weekdays-keys">
             <button class="key">Mrù'</button>
             <button class="key">Ndʉŋ</button>
             <button class="key">ŋgaŋ</button>
@@ -82,7 +84,7 @@
             <button class="key">ŋkapyè</button>
             <button class="key">Yè</button>
         </div>
-        <div class="key-row">
+        <div class="key-row hidden" id="titles-keys">
             <button class="key">Taa Nföomí</button>
             <button class="key">Taa Támfù</button>
             <button class="key">Taa Shé'</button>
@@ -90,7 +92,7 @@
             <button class="key">Taa ŋgwáyì</button>
             <button class="key">Taa Tantò</button>
         </div>
-        <div class="key-row">
+        <div class="key-row hidden" id="villages-keys">
             <button class="key">Binshua</button>
             <button class="key">Mbaa</button>
             <button class="key">Ntumbaw</button>
@@ -154,8 +156,20 @@
         document.addEventListener('DOMContentLoaded', () => {
             const keys = document.querySelectorAll('.key');
             const input = document.getElementById('input');
+            const weekdaysKey = document.getElementById('weekdays-key');
+            const weekdaysKeys = document.getElementById('weekdays-keys');
+            const titlesKey = document.getElementById('titles-key');
+            const titlesKeys = document.getElementById('titles-keys');
             const villagesKey = document.getElementById('villages-key');
             const villagesKeys = document.getElementById('villages-keys');
+
+            weekdaysKey.addEventListener('click', () => {
+                weekdaysKeys.classList.toggle('hidden');
+            });
+
+            titlesKey.addEventListener('click', () => {
+                titlesKeys.classList.toggle('hidden');
+            });
 
             villagesKey.addEventListener('click', () => {
                 villagesKeys.classList.toggle('hidden');
@@ -165,7 +179,7 @@
                 key.addEventListener('click', () => {
                     if (key.textContent === 'Space') {
                         input.value += ' ';
-                    } else if (key.textContent !== 'Villages' && key.textContent !== 'By Dr. Ebonŋ') {
+                    } else if (key.textContent !== 'Week-days' && key.textContent !== 'Titles' && key.textContent !== 'Villages' && key.textContent !== 'By Dr. Ebonŋ') {
                         input.value += key.textContent;
                     }
                 });
