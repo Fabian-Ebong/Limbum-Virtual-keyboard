@@ -148,6 +148,13 @@
             <button class="key key-space">Space</button>
         </div>
         <div class="key-row">
+            <button class="key">Backspace</button>
+            <button class="key">Enter</button>
+            <button class="key">Undo</button>
+            <button class="key">Redo</button>
+            <button class="key">Copy</button>
+        </div>
+        <div class="key-row">
             <button class="key">By Dr. Ebonŋ</button>
         </div>
     </div>
@@ -162,6 +169,9 @@
             const titlesKeys = document.getElementById('titles-keys');
             const villagesKey = document.getElementById('villages-key');
             const villagesKeys = document.getElementById('villages-keys');
+
+            let history = [];
+            let redoStack = [];
 
             weekdaysKey.addEventListener('click', () => {
                 weekdaysKeys.classList.toggle('hidden');
@@ -179,7 +189,30 @@
                 key.addEventListener('click', () => {
                     if (key.textContent === 'Space') {
                         input.value += ' ';
+                    } else if (key.textContent === 'Backspace') {
+                        if (input.value.length > 0) {
+                            history.push(input.value);
+                            redoStack = [];
+                            input.value = input.value.slice(0, -1);
+                        }
+                    } else if (key.textContent === 'Enter') {
+                        input.value += '\n';
+                    } else if (key.textContent === 'Undo') {
+                        if (history.length > 0) {
+                            redoStack.push(input.value);
+                            input.value = history.pop();
+                        }
+                    } else if (key.textContent === 'Redo') {
+                        if (redoStack.length > 0) {
+                            history.push(input.value);
+                            input.value = redoStack.pop();
+                        }
+                    } else if (key.textContent === 'Copy') {
+                        input.select();
+                        document.execCommand('copy');
                     } else if (key.textContent !== 'Week-days' && key.textContent !== 'Titles' && key.textContent !== 'Villages' && key.textContent !== 'By Dr. Ebonŋ') {
+                        history.push(input.value);
+                        redoStack = [];
                         input.value += key.textContent;
                     }
                 });
