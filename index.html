@@ -173,6 +173,16 @@
             let history = [];
             let redoStack = [];
 
+            // Load persisted input value
+            if (localStorage.getItem('inputValue')) {
+                input.value = localStorage.getItem('inputValue');
+            }
+
+            // Save input value to localStorage
+            const saveInput = () => {
+                localStorage.setItem('inputValue', input.value);
+            };
+
             weekdaysKey.addEventListener('click', () => {
                 weekdaysKeys.classList.toggle('hidden');
             });
@@ -215,8 +225,11 @@
                         redoStack = [];
                         input.value += key.textContent;
                     }
+                    saveInput();
                 });
             });
+
+            input.addEventListener('input', saveInput);
         });
     </script>
 </body>
